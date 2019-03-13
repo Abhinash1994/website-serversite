@@ -21,6 +21,13 @@ app.post('/data',(req,res)=>{
 	})
 })
 
+app.get('/data',(req,res)=>{
+	User.find().then((data)=>{
+		res.send({data});
+	}, (e) => {
+		res.status(400).send(e);
+	});
+});
 
 app.listen(3000,function(){
 	console.log("Server is running 3000")
