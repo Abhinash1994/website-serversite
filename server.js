@@ -1,34 +1,48 @@
 const express = require('express');
+const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-
+const postdata = require('./routes/api/bloggingdata');
+const commentdata = require('./routes/api/commentStore');
+const path = require('path');
 const app = express();
+
+//body parser middleware
+
+app.use(bodyParser.urlencoded({
+    extended: true
+}))
 app.use(bodyParser.json());
+//DB config
+const db = require('./config/keys').mongoURI;
 
-var {mongoose} = require('./db/mongoose');
-var {User} = require('./models/users');
+mongoose.connect(db).then(()=>console.log('mongoDB connected'))
+	.catch(err=>console.log(err));
 
-app.post('/data',(req,res)=>{
-	var user = new User({
-		name:req.body.name,
-		paragraph:req.body.paragraph,
-		address:req.body.address
-	});
 
-	user.save().then((doc)=>{
-		res.send(doc);
-	},(e)=>{
-		res.status(400).send(e);
+app.get('/',(req,res)=>
+	res.send("hi"));
+
+//use routes
+app.use('/api/blog',postdata);
+app.use('/api/blog',commentdata);
+
+
+//Server static assets if in production
+
+if(process.env.NODE_ENV === 'production'){
+
+	//set static folder
+
+	app.use(express.static('client/build'));
+
+	app.get('*',(req,res) => {
+
+		res.sendFile(path.resolve(__dirname,'client','build','index.html'))
+
 	})
-})
 
-app.get('/data',(req,res)=>{
-	User.find().then((data)=>{
-		res.send({data});
-	}, (e) => {
-		res.status(400).send(e);
-	});
-});
+}
 
-app.listen(3000,function(){
-	console.log("Server is running 3000")
+app.listen(5000,function(){
+	console.log("Server is running 4000")
 });

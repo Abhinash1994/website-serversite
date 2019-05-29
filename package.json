@@ -1,21 +1,33 @@
 {
-  "name": "website",
+  "name": "main-website",
   "version": "1.0.0",
-  "description": "website data store in db",
+  "description": "Blogging website",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server.js"
+    "client-install": "npm install --prefix client",
+    "start": "node server.js",
+    "server": "nodemon server.js",
+    "client": "npm start --prefix client",
+    "dev": "concurrently  \"npm run server\" \"npm run client\""
   },
-  "author": "Bechu kumar pandit",
+  "author": "Bechu Kumar Pandit",
   "license": "ISC",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
-    "expect": "^24.5.0",
+    "cloudinary": "^1.14.0",
+    "concurrently": "^4.1.0",
+    "dotenv": "^7.0.0",
     "express": "^4.16.4",
-    "mocha": "^6.0.2",
+    "jsonwebtoken": "^8.5.0",
     "mongoose": "^5.4.19",
-    "nodemon": "^1.18.10",
-    "supertest": "^4.0.0"
+    "mongoose-paginate": "^5.0.3",
+    "multer": "^1.4.1",
+    "passport": "^0.4.0",
+    "passport-jwt": "^4.0.0",
+    "validator": "^10.11.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.10"
   }
 }
