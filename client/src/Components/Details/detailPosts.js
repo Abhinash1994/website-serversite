@@ -3,7 +3,7 @@ import Grid from '@material-ui/core/Grid';
 import PropTypes from 'prop-types';
 import Moment from 'react-moment';
 import axios from 'axios';
-
+import ReactDisqusComments from 'react-disqus-comments';
 import MetaTags from 'react-meta-tags';
 
 class Details extends Component {
@@ -99,7 +99,13 @@ class Details extends Component {
                     <p><EditorPreview paragraph={data.paragraph} /></p> 
                 </div>
                 
-                
+                <ReactDisqusComments
+        shortname="beyondtechz.com"
+        identifier="beyondtechz-com.disqus.com/count.js"
+        title="beyondtechz"
+        url="http://beyondtechz-com.disqus.com/count.js"
+        category_id=""
+        onNewComment={this.handleNewComment}/>
                
                 <Grid container>
 

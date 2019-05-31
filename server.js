@@ -29,10 +29,6 @@ app.use('/api/blog',commentdata);
 
 //Server static assets if in production
 
-if(process.env.NODE_ENV === 'production'){
-
-	//set static folder
-
 	app.use(express.static('client/build'));
 
 	app.get('*',(req,res) => {
@@ -41,8 +37,7 @@ if(process.env.NODE_ENV === 'production'){
 
 	})
 
-}
 
 app.listen(5000,function(){
-	console.log("Server is running 4000")
+	console.log("Server is running 3000")
 });
