@@ -3,7 +3,7 @@ import Grid from '@material-ui/core/Grid';
 import PropTypes from 'prop-types';
 import Moment from 'react-moment';
 import axios from 'axios';
-import ReactDisqusComments from 'react-disqus-comments';
+import { DiscussionEmbed } from "disqus-react";
 import MetaTags from 'react-meta-tags';
 
 class Details extends Component {
@@ -81,7 +81,12 @@ class Details extends Component {
           }
   
     let data=this.state.postData;
-
+    const { previous, next } ="http://beyondtechz-com.disqus.com/count.js";
+    const disqusShortname = "beyondtechz";
+    const disqusConfig = {
+      identifier: data.id,
+      title: data.title,
+    };
     return (
        <Grid container>
         
@@ -99,59 +104,8 @@ class Details extends Component {
                     <p><EditorPreview paragraph={data.paragraph} /></p> 
                 </div>
                 
-                <ReactDisqusComments
-        shortname="beyondtechz.com"
-        identifier="beyondtechz-com.disqus.com/count.js"
-        title="beyondtechz"
-        url="http://beyondtechz-com.disqus.com/count.js"
-        category_id=""
-        onNewComment={this.handleNewComment}/>
+                <DiscussionEmbed shortname={disqusShortname} config={disqusConfig} />
                
-                <Grid container>
-
-                  <Grid item xs={3} lg={2}>
-                        <div className="commentbox">
-                            <i className="material-icons person">
-                                    person
-                             </i>
-                     
-                        </div>
-                  </Grid>
-                  <Grid item xs={10} lg={10}>
-
-                  <div className="right">
-                      <div className="tcm-post-input-container thrive-comments">
-                       
-                        <textarea className="mainInput" id="tcm-post-content" name="tcm-post-content" placeholder="Enter your comment..." value={this.state.comment} onChange={this.handleComment}></textarea>
-                      </div>
-                        <div class="tcm-comment-additional-fields" style={{display: 'block'}}>
-                          <div class="inner clear-this">
-                            
-                            <div class="thrive-comments">
-                              
-                                <p>Comment as a guest:</p>
-                               
-                                   <input id="tcm-guest-name" className="form-input" type="text" name="name" placeholder="Name" value={this.state.name} onChange={this.handleName}/>
-                                <div class="tcm-error-message"></div>
-                                <input id="tcm-guest-email" className="form-input" type="text" name="email" placeholder="Email" value={this.state.email} onChange={this.handleGmail}/>
-                                
-                              
-
-                              <button className="save-btn tcm-truncate tcm-transparent tcm-border-color-ac-h" id="submit-comment" data-parent="0" data-level="0" type="submit" onClick={this.handleSubmit}>
-                                Submit comment
-                              </button>
-                            </div>
-
-                            
-                          </div>
-                        </div>
-                      </div>
-
-                  </Grid>
-
-              </Grid>
-      
-
             </Grid>
             <Grid item lg={2}></Grid>
 
