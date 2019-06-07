@@ -94,7 +94,7 @@ class Home extends Component {
                   <Grid className="profileSide" item xs={12} sm={6} md={5} lg={3} xl={3}>
                       <Paper>
                          <div className="aboutme">
-                                <img alt="myimage" className="face" src="./Images/profile.jpg" />
+                                <img alt="myimage" className="face" src="./Images1/profile.jpg" />
                                 <h5>Abhinash kumar </h5>
                                 <h6>Blogger ,Thinker, Coder</h6>
                                 <h6>I love to JavaScript - <b>Nepal</b></h6>
